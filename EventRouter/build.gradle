@@ -32,8 +32,15 @@ android {
 
 dependencies {
 
-    implementation project(path: ':eventport')
-    kapt project(path: ':eventport-compiler')
+    if (Boolean.valueOf(devMode)) {
+        implementation project(path: ':eventport')
+        kapt project(path: ':eventport-compiler')
+    } else  {
+        implementation 'com.github.mm-sgf.EventPort:eventport:v1.0.0'
+        kapt 'com.github.mm-sgf.EventPort:eventport-compiler:v1.0.0'
+    }
+
+
 
     implementation "androidx.core:core-ktx:$v_androidx_core_ktx"
     implementation "androidx.appcompat:appcompat:$v_androidx_appcompat"
