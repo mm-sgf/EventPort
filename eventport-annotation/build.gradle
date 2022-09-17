@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+afterEvaluate {
+    publishing {
+        publications( {
+            release(MavenPublication) {
+                afterEvaluate {
+                    from components.java
+                }
+                // Applies the component for the release build variant.
+                groupId = "sgf"
+                artifactId "eventport-annotation"
+                version deps.build_versions.versionName
+            }
+        })
+    }
+}
